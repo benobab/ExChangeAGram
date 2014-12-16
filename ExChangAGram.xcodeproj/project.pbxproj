@@ -16,6 +16,7 @@
 		EAFC90601A3FB2E400915D2B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC905F1A3FB2E400915D2B /* FeedViewController.swift */; };
 		EAFC90621A3FB46900915D2B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC90611A3FB46900915D2B /* FeedCell.swift */; };
 		EAFC90641A3FB72E00915D2B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFC90631A3FB72E00915D2B /* MobileCoreServices.framework */; };
+		EAFC90661A40CD3400915D2B /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC90651A40CD3400915D2B /* FeedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		EAFC905F1A3FB2E400915D2B /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = ../FeedViewController.swift; sourceTree = "<group>"; };
 		EAFC90611A3FB46900915D2B /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		EAFC90631A3FB72E00915D2B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		EAFC90651A40CD3400915D2B /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				EAFC90461A3F303E00915D2B /* Images.xcassets */,
 				EAFC90481A3F303E00915D2B /* LaunchScreen.xib */,
 				EAFC903E1A3F303E00915D2B /* ExChangAGram.xcdatamodeld */,
+				EAFC90651A40CD3400915D2B /* FeedItem.swift */,
 				EAFC903A1A3F303E00915D2B /* Supporting Files */,
 			);
 			path = ExChangAGram;
@@ -226,6 +229,7 @@
 				EAFC903D1A3F303E00915D2B /* AppDelegate.swift in Sources */,
 				EAFC90621A3FB46900915D2B /* FeedCell.swift in Sources */,
 				EAFC90601A3FB2E400915D2B /* FeedViewController.swift in Sources */,
+				EAFC90661A40CD3400915D2B /* FeedItem.swift in Sources */,
 				EAFC90401A3F303E00915D2B /* ExChangAGram.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

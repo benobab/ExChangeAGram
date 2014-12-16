@@ -14,4 +14,6 @@ class FeedCell : UICollectionViewCell {
 
     @IBOutlet weak var captionLabel: UILabel!
     
+    
+    
 }
