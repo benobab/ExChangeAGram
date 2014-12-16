@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		EAFC903D1A3F303E00915D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC903C1A3F303E00915D2B /* AppDelegate.swift */; };
 		EAFC90401A3F303E00915D2B /* ExChangAGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAFC903E1A3F303E00915D2B /* ExChangAGram.xcdatamodeld */; };
-		EAFC90421A3F303E00915D2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC90411A3F303E00915D2B /* ViewController.swift */; };
 		EAFC90451A3F303E00915D2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFC90431A3F303E00915D2B /* Main.storyboard */; };
 		EAFC90471A3F303E00915D2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAFC90461A3F303E00915D2B /* Images.xcassets */; };
 		EAFC904A1A3F303E00915D2B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAFC90481A3F303E00915D2B /* LaunchScreen.xib */; };
 		EAFC90561A3F303E00915D2B /* ExChangAGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC90551A3F303E00915D2B /* ExChangAGramTests.swift */; };
+		EAFC90601A3FB2E400915D2B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC905F1A3FB2E400915D2B /* FeedViewController.swift */; };
+		EAFC90621A3FB46900915D2B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC90611A3FB46900915D2B /* FeedCell.swift */; };
+		EAFC90641A3FB72E00915D2B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFC90631A3FB72E00915D2B /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +33,15 @@
 		EAFC903B1A3F303E00915D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAFC903C1A3F303E00915D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAFC903F1A3F303E00915D2B /* ExChangAGram.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExChangAGram.xcdatamodel; sourceTree = "<group>"; };
-		EAFC90411A3F303E00915D2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EAFC90441A3F303E00915D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EAFC90461A3F303E00915D2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EAFC90491A3F303E00915D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EAFC904F1A3F303E00915D2B /* ExChangAGramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExChangAGramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFC90541A3F303E00915D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAFC90551A3F303E00915D2B /* ExChangAGramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExChangAGramTests.swift; sourceTree = "<group>"; };
+		EAFC905F1A3FB2E400915D2B /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = ../FeedViewController.swift; sourceTree = "<group>"; };
+		EAFC90611A3FB46900915D2B /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		EAFC90631A3FB72E00915D2B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAFC90641A3FB72E00915D2B /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +66,7 @@
 		EAFC902E1A3F303E00915D2B = {
 			isa = PBXGroup;
 			children = (
+				EAFC90631A3FB72E00915D2B /* MobileCoreServices.framework */,
 				EAFC90391A3F303E00915D2B /* ExChangAGram */,
 				EAFC90521A3F303E00915D2B /* ExChangAGramTests */,
 				EAFC90381A3F303E00915D2B /* Products */,
@@ -79,8 +85,9 @@
 		EAFC90391A3F303E00915D2B /* ExChangAGram */ = {
 			isa = PBXGroup;
 			children = (
+				EAFC905F1A3FB2E400915D2B /* FeedViewController.swift */,
+				EAFC90611A3FB46900915D2B /* FeedCell.swift */,
 				EAFC903C1A3F303E00915D2B /* AppDelegate.swift */,
-				EAFC90411A3F303E00915D2B /* ViewController.swift */,
 				EAFC90431A3F303E00915D2B /* Main.storyboard */,
 				EAFC90461A3F303E00915D2B /* Images.xcassets */,
 				EAFC90481A3F303E00915D2B /* LaunchScreen.xib */,
@@ -164,6 +171,7 @@
 				TargetAttributes = {
 					EAFC90361A3F303E00915D2B = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 75LLFKV497;
 					};
 					EAFC904E1A3F303E00915D2B = {
 						CreatedOnToolsVersion = 6.2;
@@ -215,8 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAFC90421A3F303E00915D2B /* ViewController.swift in Sources */,
 				EAFC903D1A3F303E00915D2B /* AppDelegate.swift in Sources */,
+				EAFC90621A3FB46900915D2B /* FeedCell.swift in Sources */,
+				EAFC90601A3FB2E400915D2B /* FeedViewController.swift in Sources */,
 				EAFC90401A3F303E00915D2B /* ExChangAGram.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -330,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -342,6 +351,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ExChangAGram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -352,6 +362,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ExChangAGram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
