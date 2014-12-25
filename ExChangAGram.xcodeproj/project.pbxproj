@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EAF5106C1A4C8E270016B3B8 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF5106B1A4C8E270016B3B8 /* FilterViewController.swift */; };
 		EAFC903D1A3F303E00915D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAFC903C1A3F303E00915D2B /* AppDelegate.swift */; };
 		EAFC90401A3F303E00915D2B /* ExChangAGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAFC903E1A3F303E00915D2B /* ExChangAGram.xcdatamodeld */; };
 		EAFC90451A3F303E00915D2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFC90431A3F303E00915D2B /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EAF5106B1A4C8E270016B3B8 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		EAFC90371A3F303E00915D2B /* ExChangAGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExChangAGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFC903B1A3F303E00915D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAFC903C1A3F303E00915D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				EAFC90611A3FB46900915D2B /* FeedCell.swift */,
 				EAFC903C1A3F303E00915D2B /* AppDelegate.swift */,
 				EAFC90431A3F303E00915D2B /* Main.storyboard */,
+				EAF5106B1A4C8E270016B3B8 /* FilterViewController.swift */,
 				EAFC90461A3F303E00915D2B /* Images.xcassets */,
 				EAFC90481A3F303E00915D2B /* LaunchScreen.xib */,
 				EAFC903E1A3F303E00915D2B /* ExChangAGram.xcdatamodeld */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF5106C1A4C8E270016B3B8 /* FilterViewController.swift in Sources */,
 				EAFC903D1A3F303E00915D2B /* AppDelegate.swift in Sources */,
 				EAFC90621A3FB46900915D2B /* FeedCell.swift in Sources */,
 				EAFC90601A3FB2E400915D2B /* FeedViewController.swift in Sources */,
@@ -426,6 +430,7 @@
 				EAFC905B1A3F303E00915D2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAFC905C1A3F303E00915D2B /* Build configuration list for PBXNativeTarget "ExChangAGramTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +439,7 @@
 				EAFC905E1A3F303E00915D2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

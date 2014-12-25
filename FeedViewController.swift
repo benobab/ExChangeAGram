@@ -115,5 +115,16 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        //TODO
+        let thisItem:FeedItem = feedArray[indexPath.row] as FeedItem //Ici on récupère l'item selectionné dans la collectionView
+        
+        //Ici création du viewController Filtre en code avec toute la vue en code également
+        let filterVC = FilterViewController()
+        filterVC.thisFeedItem = thisItem
+        self.navigationController?.pushViewController(filterVC, animated: false)
+        
+    }
 
 }
