@@ -41,9 +41,6 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k5b-7z-9QP">
-                                                    <rect key="frame" x="8" y="8" width="150" height="193"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -75,11 +72,79 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Op4-n0-Las" id="O5Y-vT-Ifb"/>
+                        <segue destination="o0o-ti-jjl" kind="show" identifier="filterView" id="WS9-5a-Fde"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1377" y="479"/>
+            <point key="canvasLocation" x="1397" y="479"/>
+        </scene>
+        <!--Filter View Controller-->
+        <scene sceneID="Inj-NF-BPW">
+            <objects>
+                <viewController id="o0o-ti-jjl" userLabel="Filter View Controller" customClass="FiltreViewController" customModule="ExChangAGram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S5F-Nq-8Vk"/>
+                        <viewControllerLayoutGuide type="bottom" id="2oy-6M-5sf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9O3-RE-pzk" customClass="UICollectionView">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="≤" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OYt-Da-YAH">
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wmi-jt-3vf">
+                                    <size key="itemSize" width="170" height="209"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FiltreCell" id="F0X-Gg-40c" customClass="FilterCell" customModule="ExChangAGram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="209"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-PY-yQG">
+                                                    <rect key="frame" x="8" y="8" width="150" height="193"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imageView" destination="cOS-PY-yQG" id="Vck-gF-0jD"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="o0o-ti-jjl" id="173-ZF-hND"/>
+                                    <outlet property="delegate" destination="o0o-ti-jjl" id="ghR-Nx-XfE"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="BEe-QE-KYv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qfV-Qo-zns">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="o0o-ti-jjl" id="pc5-ii-8ce"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="G3M-VE-TKY">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="o0o-ti-jjl" id="5Id-1F-Lqy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="9O3-RE-pzk" id="lOX-pS-wp3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E7t-zm-Qpf" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2053" y="479"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dBY-BS-7y6">

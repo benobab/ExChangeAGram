@@ -13,6 +13,9 @@ import CoreData
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    let managedObjectContext:NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+
+    var filtreController:FiltreViewController!
     var feedArray:[AnyObject] = []
     
     override func viewDidLoad() {
@@ -21,12 +24,15 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Do any additional setup after loading the view.
         
         let request = NSFetchRequest(entityName: "FeedItem")
-        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-        let context:NSManagedObjectContext = appDelegate.managedObjectContext!
-        feedArray = context.executeFetchRequest(request, error: nil)!
+
+        feedArray = self.managedObjectContext.executeFetchRequest(request, error: nil)!
         
         
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,13 +87,15 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
         let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let thumbNailData = UIImageJPEGRepresentation(image, 0.1)
+        
         
         let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
         let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
         feedItem.image = imageData
-        feedItem.caption = "test caption"
+        feedItem.thumbNail = thumbNailData
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
@@ -111,20 +119,35 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let thisItem = feedArray[indexPath.item] as FeedItem
         cell.imageView.image = UIImage(data: thisItem.image)
-        cell.captionLabel.text = thisItem.caption
-        
         return cell
     }
+    
+
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //TODO
         let thisItem:FeedItem = feedArray[indexPath.row] as FeedItem //Ici on récupère l'item selectionné dans la collectionView
         
-        //Ici création du viewController Filtre en code avec toute la vue en code également
-        let filterVC = FilterViewController()
-        filterVC.thisFeedItem = thisItem
-        self.navigationController?.pushViewController(filterVC, animated: false)
+        //On envoit l'item, qu'on réutilise dans prepareForSegue
+        performSegueWithIdentifier("filterView", sender: thisItem)
+        
         
     }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //TODO
+        if (segue.identifier == "filterView")
+        {
+            
+            //ICI sender correspond à l'Item qu'on envoit via performSegueWithIdentifier ;)
+            let filtreVC: FiltreViewController = segue.destinationViewController as FiltreViewController
+            filtreVC.thisFeedItem = sender as FeedItem
+            filtreVC.mainVC = self
+        }
+    }
+    
+      
+    
 
 }
