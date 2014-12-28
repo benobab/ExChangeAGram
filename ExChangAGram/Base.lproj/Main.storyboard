@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
     </dependencies>
     <scenes>
-        <!--Feed View Controller-->
+        <!--Accueil View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="FeedViewController" customModule="ExChangAGram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="Accueil View Controller" customClass="FeedViewController" customModule="ExChangAGram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="≤" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Op4-n0-Las">
-                                <rect key="frame" x="0.0" y="0.0" width="382" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="701"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dIe-4C-GiM">
                                     <size key="itemSize" width="170" height="209"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -58,10 +58,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="e9e-NH-EbJ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="4VB-7M-Oim">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="ExchangeAGram" id="e9e-NH-EbJ">
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="XdJ-1o-OLB">
                             <connections>
-                                <action selector="suppImageButtonPressed:" destination="BYZ-38-t0r" id="SfB-93-GDv"/>
+                                <action selector="profileButtonPressed:" destination="BYZ-38-t0r" id="LP6-4P-5F2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="bcf-OY-Gyh">
@@ -70,14 +71,34 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="Op4-n0-Las" id="O5Y-vT-Ifb"/>
                         <segue destination="o0o-ti-jjl" kind="show" identifier="filterView" id="WS9-5a-Fde"/>
+                        <segue destination="xcy-4H-pgG" kind="show" id="r40-Yf-cSC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1397" y="479"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="WYs-dF-Iks">
+            <objects>
+                <viewController id="xcy-4H-pgG" userLabel="Profile View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s7S-U6-Fde"/>
+                        <viewControllerLayoutGuide type="bottom" id="RHo-tj-Ah6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XiY-MC-lCh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYa-OR-Mqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1397" y="1188"/>
         </scene>
         <!--Filter View Controller-->
         <scene sceneID="Inj-NF-BPW">
@@ -92,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="≤" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OYt-Da-YAH">
-                                <rect key="frame" x="0.0" y="0.0" width="382" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="382" height="610"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wmi-jt-3vf">
                                     <size key="itemSize" width="170" height="209"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -132,9 +153,9 @@
                                 <action selector="cancelButtonPressed:" destination="o0o-ti-jjl" id="pc5-ii-8ce"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="G3M-VE-TKY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="7CA-uV-jAs">
                             <connections>
-                                <action selector="saveButtonPressed:" destination="o0o-ti-jjl" id="5Id-1F-Lqy"/>
+                                <action selector="trashButtonPressed:" destination="o0o-ti-jjl" id="O5T-rZ-fgJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

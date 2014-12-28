@@ -11,36 +11,47 @@ import UIKit
 class FiltreViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var thisFeedItem:FeedItem! //permet de récupérer l'Item selectionné dans le premier FeedViewController
-    
+    let tmp = NSTemporaryDirectory()//où le cache de l'application sera stocké
     var mainVC:FeedViewController!
     @IBOutlet var collectionView: UICollectionView!
-
     let placeHolderImage = UIImage(named: "Placeholder")
-
     let kIntensity = 0.7
-    
     var context = CIContext(options: nil)
-    
     var filters:[CIFilter] = []
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Adding the collection view in code
         filters = photoFilters()
-        //The resposible for determinng the ways the elements are organised inside the collection
-        
-        
-        // filterView
-        //add the colelction view to the VC's view
-        //self.view.addSubview(self.collectionView)
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //avec viewWillAppear, on a pas de lag au début, contrairement à viewDidAppear
+    override func viewWillAppear(animated: Bool) {
+        //TODO
+    }
+    
+    
+    
+    @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
+        
+//        let request = NSFetchRequest(entityName: "FeedItem")
+//        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+//        let context:NSManagedObjectContext = appDelegate.managedObjectContext!
+//        context.deleteObject(feedArray[0] as NSManagedObject)
+//        feedArray.removeAtIndex(0)
+//        context.save(nil)
+    }
+    
+    
     
     
     //UICollectionViewDataSource
@@ -49,26 +60,36 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell:FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("FiltreCell", forIndexPath: indexPath) as FilterCell
+        
         //ici on commence par placeholder (rapide, et ensuite ça charge les autres en arriere plan)
         //Et on optimise en regardant à la remplir seulement si elle est vide, et on a déjà loader placeHolder en constante tout en haut du VC
         if(cell.imageView.image == nil){
-         cell.imageView.image = placeHolderImage
+            cell.imageView.image = placeHolderImage
             
             //Multithreading enfin backgroundthread
             let filterQueue:dispatch_queue_t = dispatch_queue_create("Filtre Queue", nil)
-            
             dispatch_async(filterQueue, { () -> Void in
                 //TODO
-                let filteredImage = self.filteredImageFromImage(self.thisFeedItem.thumbNail, filter: self.filters[indexPath.row])
+                let filteredImage = self.getCachedImage(indexPath.row)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    cell.imageView.image = filteredImage
+                cell.imageView.image = filteredImage
                 })
             })
         }
-        
-        
-        
+
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let filteredImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+        let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
+        self.thisFeedItem.image = imageData
+        let thumbNailData = UIImageJPEGRepresentation(filteredImage, 0.1)
+        self.thisFeedItem.thumbNail = thumbNailData
+        
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
     
@@ -128,20 +149,36 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         self.navigationController?.popViewControllerAnimated(true)
     }
-    @IBAction func saveButtonPressed(sender: UIBarButtonItem) {
-        
-        //ToDo
-        //Changer le feedArray du premier View Controller puis popView pour revenir
-        
+    
+    
+    
+    
+    //cache func
+    //ici on crée l'image en cache si elle n'est pas déjà créée en la prenant de l'item et en créant son filename et son path dans le cache
+    func cacheImage(imageNumber : Int){
+        let fileName = "\(imageNumber)"
+        let uniquePath = tmp.stringByAppendingPathComponent(fileName)
+        if(!NSFileManager.defaultManager().fileExistsAtPath(fileName))
+        {
+            let data = self.thisFeedItem.thumbNail
+            let filter = self.filters[imageNumber]
+            let image = filteredImageFromImage(data, filter: filter)
+            UIImageJPEGRepresentation(image,0.1).writeToFile(uniquePath, atomically: true)
+        }
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //On change de vu et on update l'image
-        let cell:FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("FiltreCell", forIndexPath: indexPath) as FilterCell
-        var filteredItem: FeedItem = FeedItem()
-        filteredItem.image =  UIImageJPEGRepresentation(cell.imageView.image, 1.0)
+    //ici on retourne une image du cache, et si elle n'est pas créée, on utilise la fonction précédente pour la créer
+    func getCachedImage (imageNumber: Int) -> UIImage {
+        let fileName = "\(imageNumber)"
+        let uniquePath = tmp.stringByAppendingPathComponent(fileName)
+        var image:UIImage
         
-        mainVC.feedArray[0] = filteredItem
-        self.navigationController?.popViewControllerAnimated(true)
+        if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
+            image = UIImage(contentsOfFile: uniquePath)!
+        } else {
+            self.cacheImage(imageNumber)
+            image = UIImage(contentsOfFile: uniquePath)!
+        }
+        return image
     }
 }

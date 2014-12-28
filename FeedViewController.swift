@@ -18,38 +18,34 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     var filtreController:FiltreViewController!
     var feedArray:[AnyObject] = []
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        let request = NSFetchRequest(entityName: "FeedItem")
-
-        feedArray = self.managedObjectContext.executeFetchRequest(request, error: nil)!
-        
-        
-        
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
+        let request = NSFetchRequest(entityName: "FeedItem")
+        feedArray = self.managedObjectContext.executeFetchRequest(request, error: nil)!
         self.collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        NSURLCache.sharedURLCache().removeAllCachedResponses()
     }
     
-    @IBAction func suppImageButtonPressed(sender: UIBarButtonItem) {
-        let request = NSFetchRequest(entityName: "FeedItem")
-        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-        let context:NSManagedObjectContext = appDelegate.managedObjectContext!
-        context.deleteObject(feedArray[0] as NSManagedObject)
-        feedArray.removeAtIndex(0)
-        context.save(nil)
+    
+    
+    @IBAction func profileButtonPressed(sender: UIBarButtonItem) {
         
-        self.collectionView.reloadData()
+        
     }
+    
+    
+
     //appui sur le bouton photo de la bar de nav
     @IBAction func photoButtonPressed(sender: UIBarButtonItem) {
         //access to MobileCoreServices
@@ -125,7 +121,6 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //TODO
         let thisItem:FeedItem = feedArray[indexPath.row] as FeedItem //Ici on récupère l'item selectionné dans la collectionView
         
         //On envoit l'item, qu'on réutilise dans prepareForSegue
@@ -136,7 +131,6 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //TODO
         if (segue.identifier == "filterView")
         {
             
