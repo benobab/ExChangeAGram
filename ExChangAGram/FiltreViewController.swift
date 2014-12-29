@@ -5,7 +5,7 @@
 //  Created by BenLacroix on 25/12/2014.
 //  Copyright (c) 2014 Benobab. All rights reserved.
 //
-import CoreData
+import  CoreData
 import UIKit
 
 class FiltreViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -106,6 +106,8 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
         let thumbNailData = UIImageJPEGRepresentation(filteredImage, 0.1)
         self.thisFeedItem.thumbNail = thumbNailData
         self.thisFeedItem.caption = caption
+        self.thisFeedItem.filtered = true
+        
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -174,26 +176,22 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
             textField.secureTextEntry = false //don't know why
         }
         
-        var text:String = " "
+        
         let textField = alert.textFields![0] as UITextField //ca veut dire qu'on prend le premier textField car il peut y en avoir plusieurs
         
-        if (textField.text != nil)
-        {
-            text = textField.text
-        }
         
         //ajout d'une action
         let postePhotoOnFacebookAction = UIAlertAction(title: "Post photo on Facebook", style: UIAlertActionStyle.Destructive) { (alertAction) -> Void in
             
             self.shareToFacebook(indexPath)
-            self.saveFIlterPhotoToCoreData(indexPath,caption:  text)
+            self.saveFIlterPhotoToCoreData(indexPath,caption:  textField.text)
             
         }
         //on ajoute l'action à notre AlertController
         alert.addAction(postePhotoOnFacebookAction)
         
         let saveFilterWithoutPostingAction = UIAlertAction(title: "Save Filter without sharing photo", style: UIAlertActionStyle.Default) { (saveAction) -> Void in
-            self.saveFIlterPhotoToCoreData(indexPath, caption: text)
+            self.saveFIlterPhotoToCoreData(indexPath, caption: textField.text)
         }
         alert.addAction(saveFilterWithoutPostingAction)
         
@@ -209,7 +207,7 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
     //cache func
     //ici on crée l'image en cache si elle n'est pas déjà créée en la prenant de l'item et en créant son filename et son path dans le cache
     func cacheImage(imageNumber : Int){
-        let fileName = "\(imageNumber)"
+        let fileName = "\(thisFeedItem.uniqueID)\(imageNumber)"
         let uniquePath = tmp.stringByAppendingPathComponent(fileName)
         if(!NSFileManager.defaultManager().fileExistsAtPath(fileName))
         {
@@ -222,16 +220,16 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     //ici on retourne une image du cache, et si elle n'est pas créée, on utilise la fonction précédente pour la créer
     func getCachedImage (imageNumber: Int) -> UIImage {
-        let fileName = "\(imageNumber)"
+        let fileName = "\(thisFeedItem.uniqueID)\(imageNumber)"
         let uniquePath = tmp.stringByAppendingPathComponent(fileName)
         var image:UIImage
-        
-        if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
-            image = UIImage(contentsOfFile: uniquePath)!
-        } else {
+        //si elle n'existe pas dans le cache, on la crée
+        if !NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
             self.cacheImage(imageNumber)
-            image = UIImage(contentsOfFile: uniquePath)!
         }
+        //ensuite on la retourne
+        image =  UIImage(contentsOfFile: uniquePath)!
+        image = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.Right)!
         return image
     }
 }

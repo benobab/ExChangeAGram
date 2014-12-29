@@ -9,8 +9,9 @@
 import UIKit
 import MobileCoreServices
 import CoreData
+import MapKit
 
-class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     let managedObjectContext:NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
@@ -19,11 +20,18 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     var profileController:ProfileViewController!
     var feedArray:[AnyObject] = []
     
+    var locationManager: CLLocationManager!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 100.0
+        locationManager.startUpdatingLocation()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -94,7 +102,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         feedItem.image = imageData
         feedItem.thumbNail = thumbNailData
-        feedItem.caption = ""
+        feedItem.caption = " "
+        feedItem.longitude = locationManager.location.coordinate.longitude
+        feedItem.latitude = locationManager.location.coordinate.latitude
+        feedItem.uniqueID = NSUUID().UUIDString
+        feedItem.filtered = false
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
@@ -117,7 +129,16 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         var cell:FeedCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as FeedCell
         
         let thisItem = feedArray[indexPath.item] as FeedItem
-        cell.imageView.image = UIImage(data: thisItem.image)
+        var image:UIImage
+        if(thisItem.filtered == true)
+        {
+            let returnedImage = UIImage(data: thisItem.image)!
+            image = UIImage(CGImage: returnedImage.CGImage, scale: 1.0, orientation: UIImageOrientation.Right)!
+            
+        }else {
+            image = UIImage(data: thisItem.image)!
+        }
+        cell.imageView.image = image
         cell.captionLabel.text = thisItem.caption
         return cell
     }
@@ -148,6 +169,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    
+    //LOOCATION Func delegate
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        //TODO
+    }
       
     
 

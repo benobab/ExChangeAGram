@@ -13,6 +13,8 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fbLoginView: FBLoginView!
+     
+
     
     
     override func viewDidLoad() {
@@ -28,6 +30,14 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+     
+     
+     @IBAction func showMapButtonPressed(sender: UIButton) {
+      performSegueWithIdentifier("showMapVC", sender: nil)
+     }
+     
+     
+     //Facebook Func
     
     func loginView(loginView: FBLoginView!, handleError error: NSError!) {
         println("Error: \(error.localizedDescription)")
