@@ -41,15 +41,7 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     
     
-    @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
-        
-//        let request = NSFetchRequest(entityName: "FeedItem")
-//        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-//        let context:NSManagedObjectContext = appDelegate.managedObjectContext!
-//        context.deleteObject(feedArray[0] as NSManagedObject)
-//        feedArray.removeAtIndex(0)
-//        context.save(nil)
-    }
+
     
     
     
@@ -65,6 +57,7 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
         //Et on optimise en regardant à la remplir seulement si elle est vide, et on a déjà loader placeHolder en constante tout en haut du VC
         if(cell.imageView.image == nil){
             cell.imageView.image = placeHolderImage
+            cell.captionLabel.text = thisFeedItem.caption
             
             //Multithreading enfin backgroundthread
             let filterQueue:dispatch_queue_t = dispatch_queue_create("Filtre Queue", nil)
@@ -73,6 +66,7 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
                 let filteredImage = self.getCachedImage(indexPath.row)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 cell.imageView.image = filteredImage
+                    
                 })
             })
         }
@@ -81,17 +75,40 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        createUIAlertController(indexPath)
+        
+    }
+    
+    //HELPER FUNCTIONS
+    
+    func shareToFacebook (indexPath : NSIndexPath){
+        let filteredImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
+        let photos:NSArray = [filteredImage]//on doit passer un tableau dans FBPhotoParams qui suit
+        var params = FBPhotoParams()
+        params.photos = photos
+        
+        FBDialogs.presentShareDialogWithPhotoParams(params, clientState: nil) { (call, result, error) -> Void in
+            if(result != nil){
+                println(result)
+            }else
+            {
+                println(error)
+            }
+        }
+        
+    }
+    
+    func saveFIlterPhotoToCoreData (indexPath : NSIndexPath, caption : String) {
         let filteredImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row])
         let imageData = UIImageJPEGRepresentation(filteredImage, 1.0)
         self.thisFeedItem.image = imageData
         let thumbNailData = UIImageJPEGRepresentation(filteredImage, 0.1)
         self.thisFeedItem.thumbNail = thumbNailData
-        
+        self.thisFeedItem.caption = caption
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         self.navigationController?.popViewControllerAnimated(true)
-        
     }
-    
     
     //Fonction pour renvoyer un tableau de filtre, qui seront ensuite display dans le viewController
     func photoFilters () -> [CIFilter] {
@@ -150,7 +167,43 @@ class FiltreViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    
+    func createUIAlertController(indexPath : NSIndexPath){
+        let alert = UIAlertController(title: "Photo options", message: "Add a caption ? ", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Add caption .."
+            textField.secureTextEntry = false //don't know why
+        }
+        
+        var text:String = " "
+        let textField = alert.textFields![0] as UITextField //ca veut dire qu'on prend le premier textField car il peut y en avoir plusieurs
+        
+        if (textField.text != nil)
+        {
+            text = textField.text
+        }
+        
+        //ajout d'une action
+        let postePhotoOnFacebookAction = UIAlertAction(title: "Post photo on Facebook", style: UIAlertActionStyle.Destructive) { (alertAction) -> Void in
+            
+            self.shareToFacebook(indexPath)
+            self.saveFIlterPhotoToCoreData(indexPath,caption:  text)
+            
+        }
+        //on ajoute l'action à notre AlertController
+        alert.addAction(postePhotoOnFacebookAction)
+        
+        let saveFilterWithoutPostingAction = UIAlertAction(title: "Save Filter without sharing photo", style: UIAlertActionStyle.Default) { (saveAction) -> Void in
+            self.saveFIlterPhotoToCoreData(indexPath, caption: text)
+        }
+        alert.addAction(saveFilterWithoutPostingAction)
+        
+        let cancelAction = UIAlertAction(title: "Return to the Filter Choice", style: UIAlertActionStyle.Cancel) { (cancelAct) -> Void in
+            
+        }
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
     
     //cache func

@@ -19,7 +19,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="≤" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Op4-n0-Las">
                                 <rect key="frame" x="0.0" y="0.0" width="382" height="701"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dIe-4C-GiM">
-                                    <size key="itemSize" width="170" height="209"/>
+                                    <size key="itemSize" width="170" height="221"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -29,16 +29,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="209"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="221"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QGE-UA-rev">
                                                     <rect key="frame" x="8" y="8" width="150" height="193"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgn-u3-lzL">
-                                                    <rect key="frame" x="8" y="176" width="72" height="25"/>
+                                                    <rect key="frame" x="8" y="196" width="150" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -75,7 +75,7 @@
                     <connections>
                         <outlet property="collectionView" destination="Op4-n0-Las" id="O5Y-vT-Ifb"/>
                         <segue destination="o0o-ti-jjl" kind="show" identifier="filterView" id="WS9-5a-Fde"/>
-                        <segue destination="xcy-4H-pgG" kind="show" id="r40-Yf-cSC"/>
+                        <segue destination="xcy-4H-pgG" kind="show" identifier="profileSegue" id="r40-Yf-cSC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,7 +85,7 @@
         <!--Profile View Controller-->
         <scene sceneID="WYs-dF-Iks">
             <objects>
-                <viewController id="xcy-4H-pgG" userLabel="Profile View Controller" sceneMemberID="viewController">
+                <viewController id="xcy-4H-pgG" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="ExChangAGram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s7S-U6-Fde"/>
                         <viewControllerLayoutGuide type="bottom" id="RHo-tj-Ah6"/>
@@ -93,8 +93,28 @@
                     <view key="view" contentMode="scaleToFill" id="XiY-MC-lCh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EjZ-8j-9O5">
+                                <rect key="frame" x="16" y="83" width="110" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o8u-vD-UB0">
+                                <rect key="frame" x="0.0" y="112" width="240" height="193"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yjW-Zs-P2f" customClass="FBLoginView">
+                                <rect key="frame" x="65" y="455" width="200" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="fbLoginView" destination="yjW-Zs-P2f" id="h9v-19-su0"/>
+                        <outlet property="nameLabel" destination="EjZ-8j-9O5" id="9FC-04-Naq"/>
+                        <outlet property="profileImageView" destination="o8u-vD-UB0" id="Z9c-zQ-1Vl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYa-OR-Mqb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -115,7 +135,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="≤" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OYt-Da-YAH">
                                 <rect key="frame" x="0.0" y="0.0" width="382" height="610"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wmi-jt-3vf">
-                                    <size key="itemSize" width="170" height="209"/>
+                                    <size key="itemSize" width="178" height="221"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -125,16 +145,23 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="209"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="178" height="221"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-PY-yQG">
                                                     <rect key="frame" x="8" y="8" width="150" height="193"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-dg-L8u">
+                                                    <rect key="frame" x="8" y="200" width="150" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="captionLabel" destination="wa9-dg-L8u" id="evc-oO-XGk"/>
                                             <outlet property="imageView" destination="cOS-PY-yQG" id="Vck-gF-0jD"/>
                                         </connections>
                                     </collectionViewCell>
@@ -151,11 +178,6 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qfV-Qo-zns">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="o0o-ti-jjl" id="pc5-ii-8ce"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="7CA-uV-jAs">
-                            <connections>
-                                <action selector="trashButtonPressed:" destination="o0o-ti-jjl" id="O5T-rZ-fgJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

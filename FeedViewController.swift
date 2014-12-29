@@ -16,6 +16,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     let managedObjectContext:NSManagedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
 
     var filtreController:FiltreViewController!
+    var profileController:ProfileViewController!
     var feedArray:[AnyObject] = []
     
     
@@ -41,7 +42,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBAction func profileButtonPressed(sender: UIBarButtonItem) {
         
-        
+        self.performSegueWithIdentifier("profileSegue", sender: nil)
     }
     
     
@@ -90,8 +91,10 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!)
         let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
+        
         feedItem.image = imageData
         feedItem.thumbNail = thumbNailData
+        feedItem.caption = ""
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
@@ -115,6 +118,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let thisItem = feedArray[indexPath.item] as FeedItem
         cell.imageView.image = UIImage(data: thisItem.image)
+        cell.captionLabel.text = thisItem.caption
         return cell
     }
     
@@ -138,6 +142,9 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
             let filtreVC: FiltreViewController = segue.destinationViewController as FiltreViewController
             filtreVC.thisFeedItem = sender as FeedItem
             filtreVC.mainVC = self
+        }else if(segue.identifier == "profileSegue")
+        {
+            let profileVC:ProfileViewController = segue.destinationViewController as ProfileViewController
         }
     }
     
