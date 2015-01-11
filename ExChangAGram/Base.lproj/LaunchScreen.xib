@@ -16,15 +16,20 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="Glh-E9-fcX">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="Glh-E9-fcX">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="574"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="centerY" secondItem="Glh-E9-fcX" secondAttribute="centerY" constant="-47" id="1Iu-Cw-jMU"/>
+                <constraint firstAttribute="trailing" secondItem="Glh-E9-fcX" secondAttribute="trailing" id="3FU-se-BHg"/>
+                <constraint firstItem="Glh-E9-fcX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5vZ-Bv-5c0"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstItem="Glh-E9-fcX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hXs-Fk-u95"/>
+                <constraint firstAttribute="centerX" secondItem="Glh-E9-fcX" secondAttribute="centerX" id="tTX-vq-EQ9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
